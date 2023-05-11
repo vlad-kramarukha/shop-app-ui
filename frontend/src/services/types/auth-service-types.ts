@@ -4,9 +4,5 @@ export interface LogRequestParams {
 }
 
 export interface RegRequestParams extends LogRequestParams {
-	name: string
-}
-
-export interface LogResponseParams {
-	accessToken: string
+	nickname: string
 }

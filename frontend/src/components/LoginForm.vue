@@ -10,7 +10,7 @@ const { withMessage } = helpers
 export type FormMode = 'reg' | 'log'
 
 interface Fields {
-	name: string
+	nickname: string
 	email: string
 	password: string
 }
@@ -30,7 +30,7 @@ const emit = defineEmits<LoginFormEmits>()
 const { auth, reg } = useAuthService()
 
 const fields = reactive<Fields>({
-	name: '',
+	nickname: '',
 	email: '',
 	password: ''
 })
@@ -48,7 +48,7 @@ const formMode = computed({
 const isLogin = computed(() => formMode.value === 'log')
 
 const rules = {
-	name: {
+	nickname: {
 		required: withMessage('Обязательное поле', required)
 	},
 	email: {
@@ -103,7 +103,7 @@ async function onSubmit() {
 						<VSlideYTransition hide-on-leave>
 							<VTextField
 								v-if="!isLogin"
-								v-model:model-value.trim="fields.name"
+								v-model:model-value.trim="fields.nickname"
 								color="primary"
 								density="compact"
 								label="Имя пользователя"

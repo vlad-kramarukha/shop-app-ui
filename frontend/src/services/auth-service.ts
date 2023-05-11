@@ -1,19 +1,17 @@
 import useRestService from './rest-service'
-import useToken from './token-service'
-import { LogRequestParams, LogResponseParams, RegRequestParams } from './types/auth-service-types'
+import { LogRequestParams, RegRequestParams } from './types/auth-service-types'
 
 export enum AuthServiceApi {
 	AUTH = '/auth/authenticate',
 	REG = '/auth/register'
 }
 export default function useAuthService() {
-	const token = useToken()
 	const instance = useRestService()
 
 	async function auth(params: LogRequestParams) {
 		try {
-			const { data }: { data: LogResponseParams } = await instance.post(AuthServiceApi.AUTH, params)
-			token.value = data.accessToken
+			const { data } = await instance.post(AuthServiceApi.AUTH, params)
+			console.log('LOG: ', data)
 		} catch (e) {
 			console.error(e)
 		}
@@ -22,6 +20,7 @@ export default function useAuthService() {
 	async function reg(params: RegRequestParams) {
 		try {
 			const { data } = await instance.post(AuthServiceApi.REG, params)
+			console.log('REG: ', data)
 		} catch (e) {
 			console.error(e)
 		}
