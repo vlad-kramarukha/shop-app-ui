@@ -29,6 +29,8 @@ const emit = defineEmits<LoginFormEmits>()
 
 const { auth, reg } = useAuthService()
 
+const loadingForm = ref(false)
+
 const fields = reactive<Fields>({
 	nickname: '',
 	email: '',
@@ -61,7 +63,7 @@ const rules = {
 	}
 }
 
-const computedRules = computed(() => (isLogin.value ? omit(rules, 'name') : rules))
+const computedRules = computed(() => (isLogin.value ? omit(rules, 'nickname') : rules))
 
 const v$ = useVuelidate(computedRules, fields)
 
@@ -83,18 +85,22 @@ async function onSubmit() {
 	const isValid = await v$.value.$validate()
 
 	if (isValid) {
+		loadingForm.value = true
+
 		if (isLogin.value) {
 			const { email, password } = fields
 			await auth({ email, password })
 		} else {
 			await reg(fields)
 		}
+
+		loadingForm.value = false
 	}
 }
 </script>
 
 <template>
-	<VCard flat class="drop-shadow w-96 rounded-lg px-4 py-4">
+	<VCard color="primary" :loading="loadingForm" flat class="drop-shadow w-96 rounded-lg px-4 py-4">
 		<VCardTitle>{{ titleText }}</VCardTitle>
 		<VCardText>
 			<VForm @keydown.enter="onSubmit" ref="form">
@@ -104,10 +110,9 @@ async function onSubmit() {
 							<VTextField
 								v-if="!isLogin"
 								v-model:model-value.trim="fields.nickname"
-								color="primary"
 								density="compact"
 								label="Имя пользователя"
-								:error-messages="errorMessage('name')"
+								:error-messages="errorMessage('nickname')"
 								variant="outlined"
 							>
 								<template #prepend-inner>
@@ -120,7 +125,6 @@ async function onSubmit() {
 					<VCol cols="12">
 						<VTextField
 							v-model:model-value.trim="fields.email"
-							color="primary"
 							label="Почта"
 							:error-messages="errorMessage('email')"
 							density="compact"
@@ -135,7 +139,6 @@ async function onSubmit() {
 					<VCol cols="12">
 						<VTextField
 							v-model:model-value.trim="fields.password"
-							color="primary"
 							label="Пароль"
 							:error-messages="errorMessage('password')"
 							density="compact"
@@ -151,12 +154,12 @@ async function onSubmit() {
 			</VForm>
 		</VCardText>
 		<VCardActions>
-			<VRow no-gutters justify="space-between">
+			<VRow no-gutters justify="space-between" class="px-2">
 				<VCol cols="auto">
-					<VBtn color="primary" @click="changeFormMode">{{ changeFromModeBtnText }}</VBtn>
+					<VBtn @click="changeFormMode">{{ changeFromModeBtnText }}</VBtn>
 				</VCol>
 				<VCol cols="auto">
-					<VBtn class="shadow" color="primary" @click="onSubmit">{{ actionBtnText }}</VBtn>
+					<VBtn class="shadow" @click="onSubmit">{{ actionBtnText }}</VBtn>
 				</VCol>
 			</VRow>
 		</VCardActions>

@@ -9,21 +9,13 @@ export default function useAuthService() {
 	const instance = useRestService()
 
 	async function auth(params: LogRequestParams) {
-		try {
-			const { data } = await instance.post(AuthServiceApi.AUTH, params)
-			console.log('LOG: ', data)
-		} catch (e) {
-			console.error(e)
-		}
+		const data = await instance.post(AuthServiceApi.AUTH, params)
+		console.log('LOG: ', data)
 	}
 
 	async function reg(params: RegRequestParams) {
-		try {
-			const { data } = await instance.post(AuthServiceApi.REG, params)
-			console.log('REG: ', data)
-		} catch (e) {
-			console.error(e)
-		}
+		const data = await instance.post(AuthServiceApi.REG, params)
+		console.log('REG: ', data)
 	}
 
 	return { reg, auth }
