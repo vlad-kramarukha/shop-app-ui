@@ -3,11 +3,12 @@ import { useRouter } from 'vue-router'
 import dayjs from 'dayjs'
 
 const baseConfig: AxiosRequestConfig = {
-	baseURL: 'http://localhost:8080'
+	baseURL: 'http://localhost:8080',
+	withCredentials: true
 }
 export default function useRestService(config: AxiosRequestConfig = {}) {
-	const { baseURL } = baseConfig
-	const instance = axios.create({ baseURL, ...config })
+	const { baseURL, withCredentials } = baseConfig
+	const instance = axios.create({ baseURL, withCredentials, ...config })
 	const router = useRouter()
 
 	instance.interceptors.response.use(
