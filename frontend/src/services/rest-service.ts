@@ -3,7 +3,8 @@ import { useRouter } from 'vue-router'
 import dayjs from 'dayjs'
 
 const baseConfig: AxiosRequestConfig = {
-	baseURL: 'http://localhost:8080'
+	baseURL: 'http://localhost:8080',
+	withCredentials: true
 }
 export default function useRestService(config: AxiosRequestConfig = {}) {
 	const { baseURL } = baseConfig
