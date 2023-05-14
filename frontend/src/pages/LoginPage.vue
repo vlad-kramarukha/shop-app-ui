@@ -5,9 +5,10 @@ import { computed } from 'vue'
 
 const route = useRoute()
 const router = useRouter()
+
 const mode = computed({
 	get(): FormMode {
-		return route.path === '/login' ? 'log' : 'reg'
+		return route.name
 	},
 	set(name) {
 		router.push({ name })

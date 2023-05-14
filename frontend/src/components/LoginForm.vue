@@ -103,7 +103,7 @@ async function onSubmit() {
 	<VCard color="primary" :loading="loadingForm" flat class="drop-shadow w-96 rounded-lg px-4 py-4">
 		<VCardTitle>{{ titleText }}</VCardTitle>
 		<VCardText>
-			<VForm @keydown.enter="onSubmit" ref="form">
+			<VForm @keydown.enter.prevent="onSubmit" ref="form">
 				<VRow no-gutters>
 					<VCol cols="12">
 						<VSlideYTransition hide-on-leave>
