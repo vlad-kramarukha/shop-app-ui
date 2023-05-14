@@ -4,6 +4,7 @@ import { ErrorObject, useVuelidate } from '@vuelidate/core'
 import { email, helpers, minLength, required } from '@vuelidate/validators'
 import useAuthService from '../services/auth-service'
 import { omit } from 'lodash'
+import useRestService from '../services/rest-service'
 
 const { withMessage } = helpers
 
@@ -97,6 +98,10 @@ async function onSubmit() {
 		loadingForm.value = false
 	}
 }
+
+function onTest() {
+	useRestService().get('/someinfo')
+}
 </script>
 
 <template>
@@ -157,6 +162,9 @@ async function onSubmit() {
 			<VRow no-gutters justify="space-between" class="px-2">
 				<VCol cols="auto">
 					<VBtn @click="changeFormMode">{{ changeFromModeBtnText }}</VBtn>
+				</VCol>
+				<VCol cols="auto">
+					<VBtn class="shadow" @click="onTest">SUKA</VBtn>
 				</VCol>
 				<VCol cols="auto">
 					<VBtn class="shadow" @click="onSubmit">{{ actionBtnText }}</VBtn>
