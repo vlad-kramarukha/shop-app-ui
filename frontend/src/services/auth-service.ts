@@ -9,7 +9,7 @@ export default function useAuthService() {
 	const router = useRouter()
 
 	async function auth(params: LogRequestParams) {
-		const data = await instance.post(AuthServiceApi.AUTH, params, { withCredentials: true })
+		const data = await instance.post(AuthServiceApi.AUTH, params)
 	}
 
 	async function reg(params: RegRequestParams) {
