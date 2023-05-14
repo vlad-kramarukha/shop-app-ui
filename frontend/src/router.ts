@@ -1,5 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
+export enum Routes {
+	LogPage = '/login',
+	RegPage = '/registration'
+}
+
 const useLoginPage = () => import('./pages/LoginPage.vue')
 
 const router = createRouter({
@@ -11,12 +16,12 @@ const router = createRouter({
 		},
 		{
 			name: 'log',
-			path: '/login',
+			path: Routes.LogPage,
 			component: useLoginPage
 		},
 		{
 			name: 'reg',
-			path: '/registration',
+			path: Routes.RegPage,
 			component: useLoginPage
 		},
 	],

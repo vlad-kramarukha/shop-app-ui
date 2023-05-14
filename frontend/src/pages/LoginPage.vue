@@ -6,7 +6,7 @@ import { computed } from 'vue'
 const route = useRoute()
 const router = useRouter()
 
-const mode = computed({
+const formMode = computed({
 	get(): FormMode {
 		return route.name
 	},
@@ -18,7 +18,7 @@ const mode = computed({
 
 <template>
 	<div class="h-screen grid place-content-center">
-		<LoginForm v-model:mode="mode" />
+		<LoginForm v-model:mode="formMode" />
 	</div>
 </template>
 
