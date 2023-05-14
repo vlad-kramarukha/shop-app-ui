@@ -100,7 +100,7 @@ async function onSubmit() {
 }
 
 function onTest() {
-	useRestService().get('/someinfo')
+	useRestService().get('/someinfo', { withCredentials: true })
 }
 </script>
 
