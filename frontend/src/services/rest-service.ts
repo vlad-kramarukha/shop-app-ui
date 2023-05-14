@@ -7,8 +7,8 @@ const baseConfig: AxiosRequestConfig = {
 	withCredentials: true
 }
 export default function useRestService(config: AxiosRequestConfig = {}) {
-	const { baseURL } = baseConfig
-	const instance = axios.create({ baseURL, ...config })
+	const { baseURL, withCredentials } = baseConfig
+	const instance = axios.create({ baseURL, withCredentials, ...config })
 	const router = useRouter()
 
 	instance.interceptors.response.use(
