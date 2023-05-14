@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 export enum Routes {
+	HomePage = '/',
 	LogPage = '/login',
 	RegPage = '/registration'
 }
@@ -11,8 +12,8 @@ const router = createRouter({
 	history: createWebHistory(),
 	routes: [
 		{
-			path: '/',
-			redirect: '/login',
+			path: Routes.HomePage,
+			redirect: Routes.LogPage,
 		},
 		{
 			name: 'log',
