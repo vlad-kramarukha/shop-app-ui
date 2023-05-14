@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { system } from './utilities/theme'
+import { colorMode } from './utilities/theme'
 </script>
 
 <template>
-	<VThemeProvider :theme="system as string" with-background>
+	<VThemeProvider :theme="colorMode" with-background>
 		<RouterView #component="component">
 			<VScaleTransition>
 				<Component :is="component"></Component>
