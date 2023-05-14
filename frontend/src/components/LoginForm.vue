@@ -58,7 +58,7 @@ const rules = {
 		required: withMessage('Обязательное поле', required)
 	},
 	password: {
-		minLength: withMessage('Пароль должен быть не меньше 6 символов', minLength(6)),
+		minLength: withMessage('Пароль должен быть не меньше 8 символов', minLength(8)),
 		required: withMessage('Обязательное поле', required)
 	}
 }

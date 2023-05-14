@@ -19,8 +19,8 @@ export default function useRestService(config: AxiosRequestConfig = {}) {
 
 			console.group('ERROR')
 			console.log('TIME: ', dayjs().format('HH:mm:ss DD.MM.YYYY'))
-			console.log(`CODE: ${code}`)
-			console.log(`INFO: ${response}`)
+			console.log('CODE: ', code)
+			console.log('INFO: ', response)
 			console.log('RAW: ', error.toJSON())
 			console.groupEnd()
 
