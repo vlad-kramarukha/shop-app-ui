@@ -1,12 +1,7 @@
 import useRestService from './rest-service'
-import { LogRequestParams, RegRequestParams } from './types/auth-service-types'
+import { AuthServiceApi, LogRequestParams, RegRequestParams } from './types/auth-service-types'
 import HttpStatusCodes from './types/http-status-codes'
 import { useRouter } from 'vue-router'
-
-export enum AuthServiceApi {
-	AUTH = '/auth/authenticate',
-	REG = '/auth/register'
-}
 
 export default function useAuthService() {
 	const instance = useRestService()
