@@ -1,8 +1,6 @@
 import axios, { AxiosError, AxiosRequestConfig } from 'axios'
 import { useRouter } from 'vue-router'
 import dayjs from 'dayjs'
-import HttpStatusCodes from './types/http-status-codes'
-import Cookies from 'js-cookie'
 
 const baseConfig: AxiosRequestConfig = {
 	baseURL: 'http://localhost:8080',
@@ -18,9 +16,10 @@ function log(error: AxiosError) {
 	console.groupEnd()
 }
 
-export default function useRestService(config: AxiosRequestConfig = {}) {
+export default function useRestService(namespace?: string) {
 	const { baseURL, withCredentials } = baseConfig
-	const instance = axios.create({ baseURL, withCredentials, ...config })
+	const url = namespace ? `${baseURL}/${namespace}` : baseURL
+	const instance = axios.create({ baseURL: url, withCredentials })
 	const router = useRouter()
 
 	instance.interceptors.response.use(
@@ -28,15 +27,7 @@ export default function useRestService(config: AxiosRequestConfig = {}) {
 			return response
 		},
 		async (error: AxiosError) => {
-			const { response } = error
-
 			log(error)
-
-			if (response?.status === HttpStatusCodes.Forbidden) {
-				Cookies.remove('user')
-				await router.push({ name: 'log' })
-			}
-
 			return error
 		}
 	)

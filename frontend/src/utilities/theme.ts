@@ -1,8 +1,6 @@
 import { useColorMode } from '@vueuse/core'
 import { computed } from 'vue'
 
-type ColorMode = 'dark' | 'light' | 'auto'
-
 enum LightTheme {
 	primary = '#5E35B1',
 	error = '#FDD835',
@@ -33,11 +31,16 @@ const theme = {
 		}
 	}
 }
+
 const { system, store } = useColorMode()
-function changeColorMode(colorMode: ColorMode) {
-	store.value = colorMode
-}
 
-const colorMode = computed<string>(() => (store.value === 'auto' ? system.value : store.value))
+const colorMode = computed({
+	get() {
+		return store.value === 'auto' ? system.value : store.value
+	},
+	set(newValue) {
+		store.value = newValue
+	}
+})
 
-export { colorMode, changeColorMode, theme, LightTheme, DarkTheme }
+export { store, colorMode, theme, LightTheme, DarkTheme }

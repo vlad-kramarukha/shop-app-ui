@@ -28,7 +28,7 @@ const props = defineProps<LoginFormProps>()
 
 const emit = defineEmits<LoginFormEmits>()
 
-const { auth, reg } = useAuthService()
+const { authentication, registration } = useAuthService()
 
 const loadingForm = ref(false)
 
@@ -90,9 +90,9 @@ async function onSubmit() {
 
 		if (isLogin.value) {
 			const { email, password } = fields
-			await auth({ email, password })
+			await authentication({ email, password })
 		} else {
-			await reg(fields)
+			await registration(fields)
 		}
 
 		loadingForm.value = false

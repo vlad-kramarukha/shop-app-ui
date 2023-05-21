@@ -5,16 +5,20 @@ import Cookies from 'js-cookie'
 enum Titles {
 	Home = 'Главная страница',
 	Log = 'Вход',
-	Reg = 'Регистрация'
+	Reg = 'Регистрация',
+	Admin = 'Администрирование',
+	Employee = 'Система'
 }
 
 export enum Routes {
 	Home = '/',
 	Log = '/login',
-	Reg = '/registration'
+	Reg = '/registration',
+	Admin = '/admin',
+	Employee = '/employee'
 }
 
-const title = useTitle()
+const pageTitle = useTitle()
 const useLoginPage = () => import('./pages/LoginPage.vue')
 const useHomePage = () => import('./pages/HomePage.vue')
 const useAdminPage = () => import('./pages/AdminPage.vue')
@@ -29,7 +33,7 @@ const router = createRouter({
 			component: useHomePage,
 			meta: {
 				title: Titles.Home,
-				requiresAuth: true
+				requiresAuth: false
 			}
 		},
 		{
@@ -49,14 +53,32 @@ const router = createRouter({
 				title: Titles.Reg,
 				requiresAuth: false
 			}
+		},
+		{
+			name: 'admin',
+			path: Routes.Admin,
+			component: useAdminPage,
+			meta: {
+				title: Titles.Admin,
+				requiresAuth: true
+			}
+		},
+		{
+			name: 'employee',
+			path: Routes.Employee,
+			component: useEmployeePage,
+			meta: {
+				title: Titles.Employee,
+				requiresAuth: true
+			}
 		}
 	]
 })
 
 router.beforeEach((to, from, next) => {
-	const { title: pageTitle, requiresAuth } = to.meta
+	const { title, requiresAuth } = to.meta
 
-	title.value = pageTitle
+	pageTitle.value = title
 
 	if (requiresAuth && !Cookies.get('user')) {
 		return next(Routes.Log)

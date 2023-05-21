@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import './style.css'
 import App from './App.vue'
+import Notifications from '@kyvg/vue3-notification'
 
 import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/styles'
@@ -19,4 +20,5 @@ const vuetify = createVuetify({
 
 app.use(vuetify)
 app.use(router)
+app.use(Notifications)
 app.mount('#app')

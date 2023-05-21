@@ -1,6 +1,7 @@
 export enum AuthServiceApi {
-	AUTH = '/auth/authenticate',
-	REG = '/auth/register'
+	AUTHENTICATION = '/authenticate',
+	REGISTRATION = '/register',
+	LOGOUT = '/logout'
 }
 
 export interface LogRequestParams {

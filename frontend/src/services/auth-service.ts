@@ -3,28 +3,30 @@ import { AuthServiceApi, LogRequestParams, RegRequestParams } from './types/auth
 import HttpStatusCodes from './types/http-status-codes'
 import { useRouter } from 'vue-router'
 import { Routes } from '../router'
-import Cookies from 'js-cookie'
 
 export default function useAuthService() {
-	const instance = useRestService()
+	const instance = useRestService('auth')
 	const router = useRouter()
 
-	async function auth(params: LogRequestParams) {
-		const data = await instance.post(AuthServiceApi.AUTH, params)
+	async function authentication(params: LogRequestParams) {
+		const { status } = await instance.post(AuthServiceApi.AUTHENTICATION, params)
 
-		if (data.status === HttpStatusCodes.OK) {
-			Cookies.set('user', 'authorized')
+		if (status === HttpStatusCodes.OK) {
 			await router.push(Routes.Home)
 		}
 	}
 
-	async function reg(params: RegRequestParams) {
-		const data = await instance.post(AuthServiceApi.REG, params)
+	async function registration(params: RegRequestParams) {
+		const { status } = await instance.post(AuthServiceApi.REGISTRATION, params)
 
-		if (data.status === HttpStatusCodes.OK) {
+		if (status === HttpStatusCodes.OK) {
 			await router.push(Routes.Log)
 		}
 	}
 
-	return { reg, auth }
+	async function logout() {
+		const { status } = await instance.post(AuthServiceApi.LOGOUT)
+	}
+
+	return { registration, authentication }
 }
