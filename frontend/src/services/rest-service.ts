@@ -25,7 +25,7 @@ export default function useRestService(config: AxiosRequestConfig = {}) {
 
 	instance.interceptors.response.use(
 		(response) => {
-			return response.data
+			return response
 		},
 		async (error: AxiosError) => {
 			const { response } = error

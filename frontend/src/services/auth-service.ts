@@ -11,9 +11,8 @@ export default function useAuthService() {
 
 	async function auth(params: LogRequestParams) {
 		const data = await instance.post(AuthServiceApi.AUTH, params)
-		console.log('AUTH', data)
+
 		if (data.status === HttpStatusCodes.OK) {
-			console.log('USER LOGIN')
 			Cookies.set('user', 'authorized')
 			await router.push(Routes.Home)
 		}
