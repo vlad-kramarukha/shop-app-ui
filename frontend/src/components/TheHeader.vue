@@ -1,8 +1,15 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed } from 'vue'
 import { colorMode, store } from '../utilities/theme'
 
-const themeMode = ref(store.value === 'auto')
+const themeMode = computed({
+	get() {
+		return store.value === 'auto'
+	},
+	set(newValue) {
+		store.value = newValue ? 'auto' : colorMode.value
+	}
+})
 
 const computedThemeIcon = computed(() =>
 	colorMode.value === 'light' ? 'mdi-lightbulb-on-outline' : 'mdi-weather-night'
@@ -13,10 +20,6 @@ const hasDisabledToggle = computed(() => store.value === 'auto')
 function toggleColorMode() {
 	colorMode.value = colorMode.value === 'dark' ? 'light' : 'dark'
 }
-
-watch(themeMode, (newValue) => {
-	store.value = newValue ? 'auto' : colorMode.value
-})
 </script>
 
 <template>
