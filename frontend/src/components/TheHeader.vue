@@ -22,7 +22,7 @@ watch(themeMode, (newValue) => {
 <template>
 	<VLayout>
 		<VAppBar density="compact" color="primary" elevation="0" class="shadow">
-			<template #title> Shop </template>
+			<template #title> Shop</template>
 
 			<template #append>
 				<VTooltip text="Тема как в системе" location="bottom">
@@ -49,7 +49,23 @@ watch(themeMode, (newValue) => {
 					</template>
 				</VTooltip>
 
-				<VBtn icon="mdi-dots-vertical" />
+				<VTooltip text="Избранное" location="bottom">
+					<template #activator="{ props }">
+						<VBtn :="props" icon="mdi-heart-outline" />
+					</template>
+				</VTooltip>
+
+				<VTooltip text="Корзина" location="bottom">
+					<template #activator="{ props }">
+						<VBtn :="props" icon="mdi-cart-outline" />
+					</template>
+				</VTooltip>
+
+				<VTooltip text="Меню" location="bottom">
+					<template #activator="{ props }">
+						<VBtn :="props" icon="mdi-dots-vertical" />
+					</template>
+				</VTooltip>
 
 				<VAvatar color="surface-variant"></VAvatar>
 			</template>
