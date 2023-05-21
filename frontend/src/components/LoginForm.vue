@@ -4,7 +4,6 @@ import { ErrorObject, useVuelidate } from '@vuelidate/core'
 import { email, helpers, minLength, required } from '@vuelidate/validators'
 import useAuthService from '../services/auth-service'
 import { omit } from 'lodash'
-import useRestService from '../services/rest-service'
 
 const { withMessage } = helpers
 

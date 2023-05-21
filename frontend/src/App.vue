@@ -6,11 +6,12 @@ import TheHeader from './components/header/TheHeader.vue'
 <template>
 	<VThemeProvider :theme="colorMode" with-background>
 		<TheHeader />
-		<RouterView #component="component">
-			<VScaleTransition>
-				<Component :is="component"></Component>
-			</VScaleTransition>
-		</RouterView>
+<!--		<RouterView #component="{ Component, route }">-->
+<!--			<VScaleTransition>-->
+<!--				<Component :is="Component" :key="route.name" />-->
+<!--			</VScaleTransition>-->
+<!--		</RouterView>-->
+		<RouterView />
 	</VThemeProvider>
 </template>
 

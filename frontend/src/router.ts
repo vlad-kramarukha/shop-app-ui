@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, RouteLocationNormalized } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import { useTitle } from '@vueuse/core'
 import Cookies from 'js-cookie'
 
@@ -7,7 +7,11 @@ enum Titles {
 	Log = 'Вход',
 	Reg = 'Регистрация',
 	Admin = 'Администрирование',
-	Employee = 'Система'
+	Employee = 'Система',
+	Catalog = 'Каталог',
+	Smartphones = 'Смартфоны',
+	Tablets = 'Планшеты',
+	Accessories = 'Аксессуары'
 }
 
 export enum Routes {
@@ -15,7 +19,11 @@ export enum Routes {
 	Log = '/login',
 	Reg = '/registration',
 	Admin = '/admin',
-	Employee = '/employee'
+	Employee = '/employee',
+	Catalog = '/catalog',
+	Smartphones = '/smartphones',
+	Tablets = '/tablets',
+	Accessories = '/accessories'
 }
 
 const pageTitle = useTitle()
@@ -23,6 +31,7 @@ const useLoginPage = () => import('./pages/LoginPage.vue')
 const useHomePage = () => import('./pages/HomePage.vue')
 const useAdminPage = () => import('./pages/AdminPage.vue')
 const useEmployeePage = () => import('./pages/EmployeePage.vue')
+const useCatalogPage = () => import('./pages/CatalogPage.vue')
 
 const router = createRouter({
 	history: createWebHistory(),
@@ -71,6 +80,40 @@ const router = createRouter({
 				title: Titles.Employee,
 				requiresAuth: true
 			}
+		},
+		{
+			name: 'catalog',
+			path: Routes.Catalog,
+			redirect: Routes.Catalog + Routes.Smartphones,
+			children: [
+				{
+					name: 'smartphones',
+					path: Routes.Smartphones,
+					component: useCatalogPage,
+					meta: {
+						title: Titles.Smartphones,
+						requiresAuth: false
+					}
+				},
+				{
+					name: 'tablets',
+					path: Routes.Tablets,
+					component: useCatalogPage,
+					meta: {
+						title: Titles.Tablets,
+						requiresAuth: false
+					}
+				},
+				{
+					name: 'accessories',
+					path: Routes.Accessories,
+					component: useCatalogPage,
+					meta: {
+						title: Titles.Accessories,
+						requiresAuth: false
+					}
+				}
+			]
 		}
 	]
 })
