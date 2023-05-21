@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { colorMode, store } from '../utilities/theme'
+import { colorMode, store } from '../../utilities/theme'
 
 const themeMode = computed({
 	get() {
@@ -30,13 +30,7 @@ function toggleColorMode() {
 			<template #append>
 				<VTooltip text="Тема как в системе" location="bottom">
 					<template #activator="{ props }">
-						<VSwitch
-							v-model:model-value="themeMode"
-							:prepend-icon="computedThemeIcon"
-							hide-details
-							inset
-							:="props"
-						/>
+						<VSwitch :="props" v-model:model-value="themeMode" density="compact" hide-details inset />
 					</template>
 				</VTooltip>
 
@@ -45,10 +39,17 @@ function toggleColorMode() {
 						<VBtn
 							:="props"
 							:disabled="hasDisabledToggle"
-							icon="mdi-theme-light-dark"
+							:icon="computedThemeIcon"
 							@click="toggleColorMode"
 							class="ml-2"
+							elevation="0"
 						/>
+					</template>
+				</VTooltip>
+
+				<VTooltip text="Личный кабинет" location="bottom">
+					<template #activator="{ props }">
+						<VBtn :="props" icon="mdi-account-outline" />
 					</template>
 				</VTooltip>
 
@@ -64,13 +65,10 @@ function toggleColorMode() {
 					</template>
 				</VTooltip>
 
-				<VTooltip text="Меню" location="bottom">
-					<template #activator="{ props }">
-						<VBtn :="props" icon="mdi-dots-vertical" />
-					</template>
-				</VTooltip>
-
-				<VAvatar color="surface-variant"></VAvatar>
+				<VAvatar
+					image="https://sun9-20.userapi.com/impg/Xyzdg3QBtgId57iZNNlInLyMPxm3VVwGB5IVcA/Qnt6V0ioDHU.jpg?size=166x226&quality=96&sign=19d57273827624238025d0da7bbe12ca&type=album"
+					color="surface-variant"
+				></VAvatar>
 			</template>
 		</VAppBar>
 	</VLayout>

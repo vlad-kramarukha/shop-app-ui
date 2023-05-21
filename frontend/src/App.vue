@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { colorMode } from './utilities/theme'
-import TheHeader from './components/TheHeader.vue'
+import TheHeader from './components/header/TheHeader.vue'
 </script>
 
 <template>
