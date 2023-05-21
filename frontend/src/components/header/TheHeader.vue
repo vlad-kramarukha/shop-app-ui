@@ -7,14 +7,14 @@ import ThemeSwitcher from './ThemeSwitcher.vue'
 <template>
 	<VLayout>
 		<VAppBar density="compact" color="primary" elevation="0" class="shadow">
-			<template #title> Shop</template>
+			<template #title>Shop</template>
 
 			<template #default>
 				<VRow no-gutters align="center">
-					<VCol cols="9">
+					<VCol cols="8">
 						<NavBar />
 					</VCol>
-					<VCol cols="3">
+					<VCol cols="4">
 						<VRow no-gutters justify="end" align="center">
 							<ThemeSwitcher />
 							<ActionsBar />

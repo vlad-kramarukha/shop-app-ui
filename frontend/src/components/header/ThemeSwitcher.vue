@@ -26,7 +26,7 @@ function toggleColorMode() {
 	<VCol cols="auto">
 		<VTooltip text="Тема как в системе" location="bottom">
 			<template #activator="{ props }">
-				<VSwitch :="props" v-model:model-value="themeMode" density="compact" hide-details inset />
+				<VSwitch :="props" v-model:model-value="themeMode" density="compact" color="error" hide-details inset />
 			</template>
 		</VTooltip>
 	</VCol>
