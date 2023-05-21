@@ -1,48 +1,68 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, RouteLocationNormalized } from 'vue-router'
 import { useTitle } from '@vueuse/core'
+import Cookies from 'js-cookie'
 
-type Title = string
+enum Titles {
+	Home = 'Главная страница',
+	Log = 'Вход',
+	Reg = 'Регистрация'
+}
+
 export enum Routes {
-	HomePage = '/',
-	LogPage = '/login',
-	RegPage = '/registration'
+	Home = '/',
+	Log = '/login',
+	Reg = '/registration'
 }
 
 const title = useTitle()
 const useLoginPage = () => import('./pages/LoginPage.vue')
+const useHomePage = () => import('./pages/HomePage.vue')
+const useAdminPage = () => import('./pages/AdminPage.vue')
+const useEmployeePage = () => import('./pages/EmployeePage.vue')
 
 const router = createRouter({
 	history: createWebHistory(),
 	routes: [
 		{
-			path: Routes.HomePage,
-			redirect: Routes.LogPage,
+			name: 'home',
+			path: Routes.Home,
+			component: useHomePage,
 			meta: {
-				title: 'Главная страница'
+				title: Titles.Home,
+				requiresAuth: true
 			}
 		},
 		{
 			name: 'log',
-			path: Routes.LogPage,
+			path: Routes.Log,
 			component: useLoginPage,
 			meta: {
-				title: 'Вход'
+				title: Titles.Log,
+				requiresAuth: false
 			}
 		},
 		{
 			name: 'reg',
-			path: Routes.RegPage,
+			path: Routes.Reg,
 			component: useLoginPage,
 			meta: {
-				title: 'Регистрация'
+				title: Titles.Reg,
+				requiresAuth: false
 			}
-		},
-	],
+		}
+	]
 })
 
 router.beforeEach((to, from, next) => {
-	title.value = to.meta.title as Title
-	next()
+	const { title: pageTitle, requiresAuth } = to.meta
+
+	title.value = pageTitle
+
+	if (requiresAuth && !Cookies.get('user')) {
+		return next(Routes.Log)
+	}
+
+	return next()
 })
 
 export default router

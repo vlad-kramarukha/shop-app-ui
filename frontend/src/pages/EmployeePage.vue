@@ -3,9 +3,7 @@
 </script>
 
 <template>
-	<div>
-		<h1>ГЛАВНАЯ СТРАНИЦА</h1>
-	</div>
+
 </template>
 
 <style scoped>

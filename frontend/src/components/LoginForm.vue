@@ -98,10 +98,6 @@ async function onSubmit() {
 		loadingForm.value = false
 	}
 }
-
-function onTest() {
-	useRestService().get('/someinfo', { withCredentials: true })
-}
 </script>
 
 <template>
@@ -163,9 +159,7 @@ function onTest() {
 				<VCol cols="auto">
 					<VBtn @click="changeFormMode">{{ changeFromModeBtnText }}</VBtn>
 				</VCol>
-				<VCol cols="auto">
-					<VBtn class="shadow" @click="onTest">SUKA</VBtn>
-				</VCol>
+
 				<VCol cols="auto">
 					<VBtn class="shadow" @click="onSubmit">{{ actionBtnText }}</VBtn>
 				</VCol>
